@@ -1,0 +1,28 @@
+Un petit texte de test pour exécuter et tester le script langstat.sh.
+
+oiseaux
+mouton
+blaireau
+occipital
+yes
+zigzag
+wagon
+képi
+direction
+farandole
+hibou
+visibilite
+
+CRAPAUD
+COURGETTE
+PINCON
+RENARD
+VACHE
+CHAT
+POISSON
+YAK
+ZOMBIE
+
+II AA EEE UUE AEI AAAAEEEEIIII
+AEIOU OO UU E III OUI
+
