@@ -15,11 +15,14 @@ fi
 }
 verif_exist_fichier(){
 
-	if [ -e $fichier_texte ]
-	then
-		echo " Le fichier existe,nous pouvons continuez "
-	else
-		verif_exist_param1
-		verif_exist_fichier
-	fi
+if [ -e $fichier_texte ]
+then
+	echo " Le fichier existe,nous pouvons continuez "
+else
+	read  -p " Le fichier $fichier_texte n'existe pas veuillez entrez un autre nom :" fichier_texte 
+	verif_exist_fichier
+fi
 }
+verif_exist_param1
+verif_exist_fichier
+
