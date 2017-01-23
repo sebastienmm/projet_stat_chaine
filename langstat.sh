@@ -31,8 +31,8 @@ verif_exist_fichier
 recherche_nombre_mots(){
 	for lettre in {A..Z}	
 	do
-		echo "$(grep $lettre $fichier_texte | wc -l) : $lettre" >> stat.txt
+		echo "$(grep $lettre $fichier_texte | wc -l) - $lettre" >> stat.txt
 	done
-	sort -n stat.txt
+	sort -n -r stat.txt
 }
 recherche_nombre_mots
