@@ -1,5 +1,6 @@
-Un petit texte de test pour exécuter et tester le script langstat.sh.
+Un petit texte de test pour exécuter et tester le script langstat .
 
+attrape-mouche
 oiseaux
 mouton
 blaireau
