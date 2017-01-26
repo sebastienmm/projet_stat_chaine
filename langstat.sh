@@ -14,12 +14,12 @@ verif_exist_param1(){      # fonction récursive
 
 	if [ -z $fichier_texte ]
 	then		
-		read -p " Entrez un fichier texte à analyser pour effectuer une statistique :" $fichier_texte
-		verif_exist_param1                                                       
+		read -p " Entrez un fichier texte à analyser pour effectuer une statistique :" fichier_texte
+		verif_exist_param1                                                        
 	else
 		echo ' le paramètre $1 est renseigné '
-	
 	fi
+	
 
 }
 
@@ -49,7 +49,11 @@ recherche_nombre_mots(){
 }
 
 # fonction donnant tous les palindromes présents dans un texte
-# mot_trie=$(sed 's/ /\n/g' $fichier_texte | grep -i "\<$lettre_alpha"  | sed 's/[\r]*$//' )
+# mot_trie : est une variable contenant un mot par ligne, d'un texte donné, et sans espace devant ou derrière ce mot
+# sed 's/ /\n/g' $fichier_texte : la commande sed permet de remplacer chaque espace séparant les mots d'un texte par un retour à la ligne
+# | grep -i "\<$lettre_alpha" : la commande grep permet de chercher pour chaque ligne le symbole indiqué en paramètre
+# ce symbole est l'expression régulière "\<chaine de caractères" placée entre double quotes qui signifie le début du mot doit commencer par
+# | sed 's/[\r]//' ) : cette commande permet de supprimer le retour chariot à la fin des mots du fichier dico.txt
 
 palindrome_complet(){
 
@@ -57,7 +61,7 @@ palindrome_complet(){
 
 	for lettre_alpha in {A..Z}
 	do
-		mot_trie=$(sed 's/ /\n/g' $fichier_texte | grep -i "\<$lettre_alpha"  | sed 's/[\r]*$//' )
+		mot_trie=$(sed 's/ /\n/g' $fichier_texte | grep -i "\<$lettre_alpha"  | sed 's/[\r]//' )
 		echo -e " Pour la lettre $lettre_alpha " >> palindrome.txt
 	
 		for mot in $mot_trie
@@ -68,11 +72,11 @@ palindrome_complet(){
 			then
 				echo  "$mot" >> palindrome.txt
 			fi
-			compt=$((compt + 1))
+			compt=$((compt + 1))                                                   # compteur de mots
 			
 		done
 	
-		echo " Le nombre de mots analysés est $compt "
+		echo " Le nombre de mots analysés est :$compt "
 		echo  "  " >> palindrome.txt
 	done
 
@@ -86,12 +90,14 @@ palindrome_complet(){
 	fi
 }
 
+# fonction donnant les palindromes commençant par la ou les lettres renseignées dans le paramètre 2
+# il s'agit de la même fonction que ci-dessus mais avec la boucle parcourant les lettres de l'alphabet en moins
 
 palindrome_lettre(){
 
 	compt=0
 
-	mot_trie=$(sed 's/ /\n/g' $fichier_texte | grep -i "\<$lettre_alpha"  | sed 's/[\r]*$//' )
+	mot_trie=$(sed 's/ /\n/g' $fichier_texte | grep -i "\<$lettre_alpha"  | sed 's/[\r]//' )
 	echo -e " Pour la lettre $lettre_alpha " >> palindrome.txt
 	for mot in $mot_trie
 	do	
@@ -102,7 +108,7 @@ palindrome_lettre(){
 			echo  "$mot" >> palindrome.txt
 		fi
 		compt=$((compt + 1))
-		echo "$compt"
+		echo " Le nombre de mots analysés est : $compt"
 	done
 
 	echo  "  " >> palindrome.txt
@@ -130,11 +136,20 @@ verif_exist_param2(){
 	fi		
 }
 
-# Appel des différentes fonctions,
-# pour tester les fonctions les unes après les autres vous pouvez les commenter.
+                                   ###############################################################################################
+                                   # Appel des différentes fonctions,                                                            #
+                                   # pour tester les fonctions les unes après les autres vous pouvez les commenter.              #
+                                   # vous pouvez lancer le script avec la commande bash -x pour voir ce qu'il se passe           #
+                                   ###############################################################################################
 
 verif_exist_param1
 verif_exist_fichier
 recherche_nombre_mots
 verif_exist_param2
 
+fichier_temporaire="langstat.sh~"
+
+if [ -e $fichier_temporaire ]
+then
+	rm -r langstat.sh~   # cette commande permet de supprimer le fichier temporaire si il a été créé
+fi
